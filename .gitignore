@@ -10,3 +10,6 @@ data/
 # 자격증명이 들어갈 수 있는 파일
 *.pem
 .aws/
+
+# Airflow 가 생성하는 설정 사본
+config/airflow.cfg
