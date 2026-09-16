@@ -1,0 +1,41 @@
+# Q4 — Spark Standalone 클러스터 (master 1 + worker 1)
+# 실행: docker compose -f docker-compose.spark.yaml up -d
+# compose 프로젝트명을 분리해 같은 폴더의 Airflow 스택(docker-compose.yaml)과 섞이지 않게 합니다.
+name: spark-cluster
+
+x-spark-common: &spark-common
+  image: apache/spark:3.5.6
+  user: root                      # 마운트 볼륨 쓰기 권한 문제를 피하기 위해
+  volumes:
+    - ./jobs:/opt/spark/jobs      # 잡 스크립트
+    - ./data:/opt/spark/data      # 입력 데이터 (worker 도 같은 경로로 읽어야 함)
+  networks:
+    - spark-net
+
+services:
+  spark-master:
+    <<: *spark-common
+    container_name: spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    environment:
+      SPARK_NO_DAEMONIZE: "true"
+    ports:
+      - "7077:7077"               # 클러스터 접속
+      - "8090:8080"               # Master Web UI (Airflow 가 8080 을 쓰므로 8090)
+
+  spark-worker:
+    <<: *spark-common
+    container_name: spark-worker
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    environment:
+      SPARK_NO_DAEMONIZE: "true"
+      SPARK_WORKER_CORES: "2"
+      SPARK_WORKER_MEMORY: "2g"
+    ports:
+      - "8091:8081"               # Worker Web UI
+    depends_on:
+      - spark-master
+
+networks:
+  spark-net:
+    driver: bridge
