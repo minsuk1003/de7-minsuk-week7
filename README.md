@@ -10,7 +10,10 @@
 - `s3_download.py` — boto3 S3 다운로드 스크립트 (Q8)
 
 ## 실습 환경
-- 로컬 PC(Windows 11, RAM 16GB) 의 Docker Desktop 에서 Airflow 3.3.1 + Spark 3.5.6 실습, AWS 는 S3(ap-northeast-2) 만 사용
+## 실습 환경
+- 로컬 PC(Windows 11, RAM 16GB) 의 Docker Desktop(WSL2) 에서 Airflow 3.3.1 공식 compose 를 커스텀 이미지(week7-airflow:minsuk, JDK 17 + pyspark 3.5.6)로 실행
+- Spark Standalone 클러스터는 별도 compose 로 구성, AWS 는 S3(ap-northeast-2) 만 사용
 
 ## 회고
 - 문항마다 커밋을 남기고 캡처에 실행 지문을 붙이는 습관이 재현 가능한 작업 기록의 기본임을 체감했다
+- Airflow 3 에서는 수동 실행에 logical_date(ds) 가 없다는 점, 로컬 파일을 공유하는 DAG 는 max_active_runs=1 이 필요하다는 점을 디버깅하며 배웠다
