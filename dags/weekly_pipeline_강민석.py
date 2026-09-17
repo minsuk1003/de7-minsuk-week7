@@ -54,6 +54,7 @@ with DAG(
     start_date=datetime(2026, 9, 1),
     schedule="@weekly",
     catchup=False,
+    max_active_runs=1,   # task 들이 컨테이너 로컬 파일을 공유하므로 동시 실행 금지
     tags=["q9"],
 ) as dag:
     t_download = PythonOperator(task_id="download_csv", python_callable=download_csv)
