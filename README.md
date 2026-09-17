@@ -10,7 +10,7 @@
 - `s3_download.py` — boto3 S3 다운로드 스크립트 (Q8)
 
 ## 실습 환경
-- Windows 11 + Docker Desktop, Airflow 3.3.1 공식 compose 를 커스텀 이미지(week7-airflow:minsuk)로 실행
+- 로컬 PC(Windows 11, RAM 16GB) 의 Docker Desktop 에서 Airflow 3.3.1 + Spark 3.5.6 실습, AWS 는 S3(ap-northeast-2) 만 사용
 
 ## 회고
-- 이번 주차에 Airflow · Spark · S3 를 하나의 파이프라인으로 연결하는 흐름을 익혔다
+- 문항마다 커밋을 남기고 캡처에 실행 지문을 붙이는 습관이 재현 가능한 작업 기록의 기본임을 체감했다
