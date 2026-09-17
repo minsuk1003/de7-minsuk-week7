@@ -10,7 +10,7 @@
 - `s3_download.py` — boto3 S3 다운로드 스크립트 (Q8)
 
 ## 실습 환경
-- Windows 11 + Docker Desktop, Airflow 3.3.1 공식 compose 를 커스텀 이미지(week7-airflow:minsuk)로 실행
+- Windows 11 + Docker Desktop(WSL2) 위에서 Airflow 3.3.1 공식 compose 를 커스텀 이미지(week7-airflow:minsuk, JDK 17 + pyspark 3.5.6)로 실행, Spark Standalone 클러스터는 별도 compose 로 구성
 
 ## 회고
-- 이번 주차에 Airflow · Spark · S3 를 하나의 파이프라인으로 연결하는 흐름을 익혔다
+- Airflow 3 에서는 수동 실행에 logical_date(ds) 가 없다는 점, 로컬 파일을 공유하는 DAG 는 max_active_runs=1 이 필요하다는 점을 디버깅하며 배웠다
