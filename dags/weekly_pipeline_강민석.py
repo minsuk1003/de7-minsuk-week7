@@ -29,7 +29,7 @@ def download_csv():
     print(f"downloaded s3://{BUCKET}/{BRONZE_KEY} -> {LOCAL_INPUT} ({os.path.getsize(LOCAL_INPUT):,} bytes)")
 
 
-def upload_silver(ds, **context):
+def upload_silver(**context):   # Airflow 3: 수동 실행엔 logical_date(ds) 가 없으므로 인자로 받지 않음
     s3 = S3Hook(aws_conn_id="aws_default").get_conn()
     today = datetime.now().strftime("%Y-%m-%d")          # 오늘 날짜 폴더
     prefix = f"silver/{today}/"
